@@ -4,7 +4,7 @@ const Product = require("../models/Product");
 
 const router = express.Router();
 
-// Add product to cart
+
 router.post("/add", async (req, res) => {
   const { productId, quantity } = req.body;
   try {
@@ -24,7 +24,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// Remove product from cart
+
 router.delete("/remove/:id", async (req, res) => {
   try {
     await Cart.findByIdAndDelete(req.params.id);
@@ -34,7 +34,7 @@ router.delete("/remove/:id", async (req, res) => {
   }
 });
 
-// Get cart details
+
 router.get("/", async (req, res) => {
   try {
     const cartItems = await Cart.find().populate("productId");
@@ -54,7 +54,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Discount logic
 const calculateDiscount = (totalPrice) => {
   if (totalPrice > 5000) return totalPrice * 0.2;
   if (totalPrice > 1000) return totalPrice * 0.1;
